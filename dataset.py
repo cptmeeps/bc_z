@@ -5,10 +5,40 @@ from PIL import Image
 import tensorflow_datasets as tfds
 import tensorflow as tf
 
+
+"""
+FeaturesDict({
+  'steps': Dataset({
+    'action': FeaturesDict({
+      'future/axis_angle_residual': Tensor(shape=(30,), dtype=float32),
+      'future/target_close': Tensor(shape=(10,), dtype=int64),
+      'future/xyz_residual': Tensor(shape=(30,), dtype=float32),
+    }),
+    'is_first': bool,
+    'is_last': bool,
+    'is_terminal': bool,
+    'observation': FeaturesDict({
+      'episode_success': float32,
+      'image': Image(shape=(171, 213, 3), dtype=uint8),
+      'natural_language_embedding': Tensor(shape=(512,), dtype=float32),
+      'natural_language_instruction': string,
+      'present/autonomous': int64,
+      'present/axis_angle': Tensor(shape=(3,), dtype=float32),
+      'present/intervention': int64,
+      'present/sensed_close': Tensor(shape=(1,), dtype=float32),
+      'present/xyz': Tensor(shape=(3,), dtype=float32),
+      'sequence_length': int64,
+    }),
+    'reward': Scalar(shape=(), dtype=float32),
+  }),
+})
+"""
+
 # utils
 
 dataset_name = "bc_z"
 source = f'gs://gresearch/robotics/{dataset_name}/0.1.0'
+
 
 def as_gif(images, path='temp.gif'):
   images[0].save(path, save_all=True, append_images=images[1:], duration=100, loop=0)
